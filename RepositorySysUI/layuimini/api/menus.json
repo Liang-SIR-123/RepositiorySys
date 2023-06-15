@@ -20,7 +20,7 @@
       "authorityId": 2,
       "authorityName": "用户管理",
       "orderNumber": 2,
-      "menuUrl": "system/user",
+      "menuUrl": "/UserInfo/ListView",
       "menuIcon": null,
       "createTime": "2018/06/29 11:05:41",
       "authority": null,

@@ -7,12 +7,18 @@ using System.Web.Mvc;
 
 namespace RepositorySysUI.Controllers
 {
+    [MyFilter]
     public class HomeController : Controller
     {
-        private RepositorySysData db = new RepositorySysData();
+        
         public ActionResult Index()
         {
-            var data = db.UserInfo.ToList();
+            //var username = HttpContext.Session["UserName"];
+            //if (username == null)
+            //{
+            //    return RedirectToAction("");
+            //}
+
             return View();
         }
 

@@ -55,6 +55,12 @@
     <Compile Include="Category.cs" />
     <Compile Include="ConsumableInfo.cs" />
     <Compile Include="ConsumableRecord.cs" />
+    <Compile Include="DTO\GetUserInfoDTO.cs" />
+    <Compile Include="Migrations\202306090933200_111.cs" />
+    <Compile Include="Migrations\202306090933200_111.Designer.cs">
+      <DependentUpon>202306090933200_111.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositorySysData.cs" />
     <Compile Include="DepartmentInfo.cs" />
     <Compile Include="FileInfo.cs" />
@@ -71,6 +77,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202306090933200_111.resx">
+      <DependentUpon>202306090933200_111.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
