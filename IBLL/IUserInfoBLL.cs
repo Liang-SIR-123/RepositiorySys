@@ -1,4 +1,5 @@
-﻿using Models.DTO;
+﻿using Models;
+using Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,16 @@ namespace IBLL
         /// <param name="count">数据总量</param>
         /// <returns></returns>
         List<GetUserInfoDTO> GetUserInfos(int page,int limit,string account,string userName,out int count);
+        bool CreateUserInfo(UserInfo entity, out string msg);
+        bool DeleteUserInfo(string Id);
+        /// <summary>
+        /// 批量用户软删除
+        /// </summary>
+        /// <param name="ids">Id集合</param>
+        /// <returns></returns>
+        bool DeleteUserInfo(List<string> ids);
+
+        bool UpdateUserInfo(UserInfo userInfo, out string msg);
+        object GetDepartmentSelect();
     }
 }

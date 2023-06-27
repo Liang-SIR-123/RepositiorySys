@@ -55,6 +55,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="ConsumableInfo.cs" />
     <Compile Include="ConsumableRecord.cs" />
+    <Compile Include="DTO\GetDepartmentInfo.cs" />
     <Compile Include="DTO\GetUserInfoDTO.cs" />
     <Compile Include="Migrations\202306090933200_111.cs" />
     <Compile Include="Migrations\202306090933200_111.Designer.cs">

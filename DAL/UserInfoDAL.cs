@@ -12,12 +12,10 @@ namespace DAL
     /// <summary>
     /// 用户表的数据访问层
     /// </summary>
- public   class UserInfoDAL: IUserInfoDAL
+ public   class UserInfoDAL:BaseDeleteDAL<UserInfo>,IUserInfoDAL
     {
         private RepositorySysData _repositorySys;
-        public UserInfoDAL(
-            RepositorySysData RepositorySys
-            )
+        public UserInfoDAL( RepositorySysData RepositorySys ):base(RepositorySys)
         {
             //RepositorySys = new RepositorySysData();
             _repositorySys = RepositorySys;
@@ -31,5 +29,10 @@ namespace DAL
             //RepositorySysData db = new RepositorySysData();
             return _repositorySys.UserInfo;
         }
+
+       
+
+
+
     }
 }

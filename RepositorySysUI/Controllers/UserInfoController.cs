@@ -1,14 +1,17 @@
 ﻿using Common;
 using IBLL;
+using Models;
 using Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace RepositorySysUI.Controllers
 {
+    [MyFilter]
     public class UserInfoController : Controller
     {
         private IUserInfoBLL _userInfoBLL;
@@ -22,7 +25,15 @@ namespace RepositorySysUI.Controllers
         {
             return View();
         }
-
+        public ActionResult CreateUserLiew()
+        {
+            return View();
+        }
+        //修改资料
+        public ActionResult UserSettingView()
+        {
+            return View();
+        }
         #region 用户列表获取的方法
         /// <summary>
         /// 用户列表获取的方法
@@ -55,6 +66,104 @@ namespace RepositorySysUI.Controllers
 
         }
         #endregion
+        #region 添加用户的方法
+        [HttpPost]
+        public ActionResult CreateUserInfo([Form] UserInfo user)
+        {
+            string msg;
+            bool isSuccess = _userInfoBLL.CreateUserInfo(user, out msg);
+            //返回结果封装
+            ReturnResult result = new ReturnResult();
+            result.Msg = msg;
+            result.IsSuccess = isSuccess;
+            if (isSuccess)
+            {
+                result.Code = 200;
+            }
+            return new JsonHelper(result);
+        }
+        #endregion
+        
+        #region 软删除的接口
+        [HttpPost]
+        public ActionResult DeleteUserInfo(string Id)
+        {
+            ReturnResult result = new ReturnResult();
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                result.Msg = "Id不能为空";
+                return new JsonHelper(result);
+            }
+            bool isSuccess = _userInfoBLL.DeleteUserInfo(Id);
+            if (isSuccess)
+            {
+               
+                result.Msg = "删除用户成功！";
+                result.Code = 200;
+            }
+            return new JsonHelper(result);
+        }
+        #endregion
+        #region 批量软删除
+        [HttpPost]
+        public ActionResult DeleteUsers(List<string> ids)
+        {
+            ReturnResult result = new ReturnResult();
+            if (ids==null || ids.Count == 0)
+            {
+                result.Msg = "你还没有选择要删除的用户";
+                return new JsonHelper(result);
+            }
+            bool isSuccess = _userInfoBLL.DeleteUserInfo(ids);
+            if (isSuccess)
+            {
+                result.Msg = "删除成功！";
+                result.Code = 200;
+            }
+            else
+            {
+                result.Msg = "删除失败！";
+               
+            }
+            return new JsonHelper(result);
+        }
+        #endregion
+        #region 编辑更新信息
+        public ActionResult UpdateUserInfoView()
+        {
+            return View();
+        }
+        #endregion
 
+        #region 更新方法
+        [HttpPost]
+        public ActionResult UpdateUser([Form] UserInfo user)
+        {
+            ReturnResult result = new ReturnResult();
+            string msg;
+            bool isSuccess = _userInfoBLL.UpdateUserInfo(user,out msg);
+            result.Msg = msg;
+            if (isSuccess)
+            {
+                result.Code = 200;
+                result.IsSuccess = isSuccess;
+            }
+            return new JsonHelper(result);
+        }
+        #endregion
+
+        #region 获取下拉框的部门信息
+        [HttpGet]
+        public ActionResult GetDepartmentSelect()
+        {
+            ReturnResult result = new ReturnResult();
+            var selectlist = _userInfoBLL.GetDepartmentSelect();
+            result.Code = 200;
+            result.IsSuccess = true;
+            result.Msg = "获取成功";
+            result.Data = selectlist;
+            return new JsonHelper(result);
+        }
+        #endregion
     }
 }

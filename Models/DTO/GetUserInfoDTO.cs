@@ -14,6 +14,7 @@ namespace Models.DTO
         public string PhoneNum { get; set; }
         public string Email { get; set; }
         public string DepartmentName { get; set; }
+        public string DepartmentId { get; set; }
         public string Sex { get; set; }
         public DateTime CreateTime { get; set; }
         

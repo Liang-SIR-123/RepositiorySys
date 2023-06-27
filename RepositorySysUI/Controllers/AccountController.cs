@@ -78,6 +78,12 @@ namespace RepositorySysUI.Controllers
                 cookie.Expires = DateTime.Now.AddDays(100);//设置过期时间为100天后过期
                 //向请求方响应
                 Response.Cookies.Add(cookie);
+
+                HttpCookie UserNamecookie = new HttpCookie("UserName", Server.UrlEncode(userName));
+                //在浏览器存储的时间
+                UserNamecookie.Expires = DateTime.Now.AddDays(100);//设置过期时间为100天后过期
+                //向请求方响应
+                Response.Cookies.Add(UserNamecookie);
                 return new JsonHelper(result);
             }
             else

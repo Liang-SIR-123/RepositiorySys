@@ -51,8 +51,8 @@ namespace RepositorySysUI
             //注册用户表的DAL和BLL 相当于new一个对象
             container.RegisterType<IUserInfoDAL, UserInfoDAL>();
             container.RegisterType<IUserInfoBLL, UserInfoBLL>();
-            container.RegisterType<IDpartmentInfo, DpartmentInfoDAL>();
-            //container.RegisterType<IUserInfoBLL, UserInfoBLL>();
+            container.RegisterType<IDpartmentInfo, DepartmentInfoDAL>();
+            container.RegisterType<IDepartmentInfoBLL, DepartmentInfoBLL>();
 
 
         }

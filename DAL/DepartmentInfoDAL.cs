@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DpartmentInfoDAL : IDpartmentInfo
+    public class DepartmentInfoDAL : BaseDeleteDAL<DepartmentInfo>, IDpartmentInfo
     {
         private RepositorySysData _repositorySys;
-        public DpartmentInfoDAL(
+        public DepartmentInfoDAL(
             RepositorySysData RepositorySys
-            )
+            ):base(RepositorySys)
         {
             //RepositorySys = new RepositorySysData();
             _repositorySys = RepositorySys;

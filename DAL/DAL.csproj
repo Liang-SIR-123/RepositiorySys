@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DpartmentInfoDAL.cs" />
+    <Compile Include="BaseDAL.cs" />
+    <Compile Include="BaseDeleteDAL.cs" />
+    <Compile Include="DepartmentInfoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInfoDAL.cs" />
   </ItemGroup>
