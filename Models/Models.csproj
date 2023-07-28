@@ -55,11 +55,35 @@
     <Compile Include="Category.cs" />
     <Compile Include="ConsumableInfo.cs" />
     <Compile Include="ConsumableRecord.cs" />
+    <Compile Include="DTO\GetCategoryInfoDTO.cs" />
+    <Compile Include="DTO\GetConsumableInfoDTO.cs" />
     <Compile Include="DTO\GetDepartmentInfo.cs" />
+    <Compile Include="DTO\GetMenuInfo.cs" />
+    <Compile Include="DTO\GetRoleInfo.cs" />
     <Compile Include="DTO\GetUserInfoDTO.cs" />
-    <Compile Include="Migrations\202306090933200_111.cs" />
-    <Compile Include="Migrations\202306090933200_111.Designer.cs">
-      <DependentUpon>202306090933200_111.cs</DependentUpon>
+    <Compile Include="DTO\GetWorkFlow_InstanceDTO.cs" />
+    <Compile Include="DTO\GetWorkFlow_InstanceStepDTO.cs" />
+    <Compile Include="DTO\GetWorkFlow_ModelDTO.cs" />
+    <Compile Include="DTO\HomeMenuDTO.cs" />
+    <Compile Include="DTO\HomeMenuInfoDTO.cs" />
+    <Compile Include="Enums\ConsumableRecordTypeEnums.cs" />
+    <Compile Include="Enums\WorkFlow_InstanceStatusEnums.cs" />
+    <Compile Include="Enums\WorkFlow_InstanceStepEnums.cs" />
+    <Compile Include="Migrations\202307051509304_222.cs" />
+    <Compile Include="Migrations\202307051509304_222.Designer.cs">
+      <DependentUpon>202307051509304_222.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307051515477_333.cs" />
+    <Compile Include="Migrations\202307051515477_333.Designer.cs">
+      <DependentUpon>202307051515477_333.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307111010408_000.cs" />
+    <Compile Include="Migrations\202307111010408_000.Designer.cs">
+      <DependentUpon>202307111010408_000.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307180324134_666.cs" />
+    <Compile Include="Migrations\202307180324134_666.Designer.cs">
+      <DependentUpon>202307180324134_666.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositorySysData.cs" />
@@ -80,8 +104,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202306090933200_111.resx">
-      <DependentUpon>202306090933200_111.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202307051509304_222.resx">
+      <DependentUpon>202307051509304_222.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307051515477_333.resx">
+      <DependentUpon>202307051515477_333.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307111010408_000.resx">
+      <DependentUpon>202307111010408_000.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307180324134_666.resx">
+      <DependentUpon>202307180324134_666.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

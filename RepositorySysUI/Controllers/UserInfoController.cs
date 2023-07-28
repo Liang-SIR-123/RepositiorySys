@@ -15,10 +15,12 @@ namespace RepositorySysUI.Controllers
     public class UserInfoController : Controller
     {
         private IUserInfoBLL _userInfoBLL;
-        public UserInfoController(IUserInfoBLL userInfo)
+        private IDepartmentInfoBLL _departmentInfoBLL;
+        public UserInfoController(IUserInfoBLL userInfo, IDepartmentInfoBLL departmentInfoBLL)
         {
             //userInfoBLL = new UserInfoBLL();
             _userInfoBLL = userInfo;
+            _departmentInfoBLL = departmentInfoBLL;
         }
         // GET: UserInfo
         public ActionResult ListView()
@@ -71,6 +73,7 @@ namespace RepositorySysUI.Controllers
         public ActionResult CreateUserInfo([Form] UserInfo user)
         {
             string msg;
+
             bool isSuccess = _userInfoBLL.CreateUserInfo(user, out msg);
             //返回结果封装
             ReturnResult result = new ReturnResult();
@@ -83,7 +86,7 @@ namespace RepositorySysUI.Controllers
             return new JsonHelper(result);
         }
         #endregion
-        
+
         #region 软删除的接口
         [HttpPost]
         public ActionResult DeleteUserInfo(string Id)
@@ -97,7 +100,7 @@ namespace RepositorySysUI.Controllers
             bool isSuccess = _userInfoBLL.DeleteUserInfo(Id);
             if (isSuccess)
             {
-               
+
                 result.Msg = "删除用户成功！";
                 result.Code = 200;
             }
@@ -109,7 +112,7 @@ namespace RepositorySysUI.Controllers
         public ActionResult DeleteUsers(List<string> ids)
         {
             ReturnResult result = new ReturnResult();
-            if (ids==null || ids.Count == 0)
+            if (ids == null || ids.Count == 0)
             {
                 result.Msg = "你还没有选择要删除的用户";
                 return new JsonHelper(result);
@@ -123,7 +126,7 @@ namespace RepositorySysUI.Controllers
             else
             {
                 result.Msg = "删除失败！";
-               
+
             }
             return new JsonHelper(result);
         }
@@ -141,7 +144,7 @@ namespace RepositorySysUI.Controllers
         {
             ReturnResult result = new ReturnResult();
             string msg;
-            bool isSuccess = _userInfoBLL.UpdateUserInfo(user,out msg);
+            bool isSuccess = _userInfoBLL.UpdateUserInfo(user, out msg);
             result.Msg = msg;
             if (isSuccess)
             {
@@ -165,5 +168,71 @@ namespace RepositorySysUI.Controllers
             return new JsonHelper(result);
         }
         #endregion
+        #region 修改个人资料
+        [HttpGet]
+        public ActionResult GetUserfile(string Id)
+        {
+            ReturnResult result = new ReturnResult();
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                result.Msg = "用户Id不能为空！";
+                return new JsonHelper(result);
+            }
+            var Info = _userInfoBLL.GetUserFile(Id);
+            var selectlist = _userInfoBLL.GetDepartmentSelect();
+            result.Code = 200;
+            result.IsSuccess = true;
+            result.Msg = "获取成功";
+            result.Data = new
+            {
+                Info,
+                selectlist
+            };
+            return new JsonHelper(result);
+        }
+        [HttpGet]
+        public ActionResult GetUserFiles(string Id)
+        {
+            ReturnResult result = new ReturnResult();
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                result.Msg = "用户Id不能为空！";
+                return new JsonHelper(result);
+            }
+            var Info = _userInfoBLL.GetUserFiles(Id);
+            var selectlist = _departmentInfoBLL.GetSelectOptions();
+            result.Code = 200;
+            result.IsSuccess = true;
+            result.Msg = "获取成功";
+            result.Data = new
+            {
+                Info,
+                selectlist
+            };
+            return new JsonHelper(result);
+        }
+        #endregion
+
+        #region 修改密码
+        public ActionResult UpdatePassWord()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UpdatePwd(string id, string oldPwd, string newPwd, string againPwd)
+        {
+            ReturnResult result = new ReturnResult();
+            string msg;
+            bool IsSuccess = _userInfoBLL.UpdatePWD(id, oldPwd, newPwd, againPwd, out msg);
+            result.Msg =msg;
+            if (IsSuccess)
+            {
+                result.Code = 200;
+                result.IsSuccess = IsSuccess;
+            }
+            return new JsonHelper(result);
+        }
+        #endregion
+
     }
 }

@@ -1,0 +1,193 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form " lay-filter="formTest" >
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label ">描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入描述" class="layui-textarea" name="desrciption"  lay-reqtext="描述不能为空"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="required" lay-reqtext="标题不能为空" placeholder="请输入标题" value="" class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">等级</label>
+            <div class="layui-input-block">
+                <input type="number" name="level" lay-reqtext="等级不能为空" placeholder="请输入等级" value="" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">排序</label>
+            <div class="layui-input-block">
+                <input type="number" name="sort"  lay-reqtext="排序不能为空" placeholder="请输入排序" value="" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="href"  lay-reqtext="地址不能为空" placeholder="请输入地址" value="" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">图标</label>
+            <div class="layui-input-block">
+                <input type="text" name="icon"  lay-reqtext="图标不能为空" placeholder="请输入图标" value="" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">目标</label>
+            <div class="layui-input-block">
+                <input type="text" name="target" lay-reqtext="目标不能为空" placeholder="请输入目标" value="" class="layui-input">
+
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">父级</label>
+            <div class="layui-input-block">
+                <select name="parentId" id="parentSelect"><option value=""></option></select>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+
+            //Ajax获取下拉框数据
+            var id = window.location.search.substr(4)
+            console.log(id);
+            $.ajax({
+                url: '/MenuInfo/GetParentMenu',
+                type: 'get',
+                data: {
+                    id: id
+                },
+                success: function (res) {
+                    console.log(res);
+                    var selectdata = res.data.menuInfoList;
+                    var list = res.data.list;
+                    console.log(list);
+                    console.log(selectdata);
+                    for (var i = 0; i < selectdata.length; i++) {
+                        $("#parentSelect").append('<option value="' + selectdata[i].value + '">' + selectdata[i].title + '</option>')
+                    }
+                    //调用form重写渲染select
+                    form.render("select");
+                    form.val("formTest", {
+                        "desrciption": list.desrciption,
+                        "title": list.title,
+                        "level": list.level,
+                        "sort": list.sort,
+                        "href": list.href,
+                        "icon": list.icon,
+                        "target": list.target,
+                        "parentId": list.parentId
+
+                    })
+
+
+                }
+            })
+
+
+            //监听提交
+            form.on('submit(saveBtn)', function (data) {
+                data.field.id = id;
+                console.log(data);
+                $.ajax({
+                    url: '/MenuInfo/EditMenuInfo',
+                    type: 'post',
+                    data: data.field,
+
+                    success: function (res) {
+                        //判断是否添加成功
+                        if (res.code == 200) {
+                            //重载
+                            parent.table.reload('currentTableId', {
+                                page: {
+                                    curr: 1
+                                }
+                                , where: {
+                                    // searchParams: result
+
+                                }
+                            }, 'data');
+
+
+                            var index = layer.alert(res.msg, {
+                                title: '添加的结果'
+                            }, function () {
+
+                                // 关闭弹出层
+                               // layer.close(index);
+
+                                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                                //  parent.location.reload();
+                                parent.layer.close(iframeIndex);
+
+                            });
+
+                        } else {
+                            layer.alert(res.msg);
+                        }
+                    }
+                })
+
+
+
+
+
+                return false;
+            });
+
+        });</script>
+</body>
+</html>
+

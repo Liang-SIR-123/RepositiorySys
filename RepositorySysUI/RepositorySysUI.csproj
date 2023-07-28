@@ -147,9 +147,17 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryInfoController.cs" />
+    <Compile Include="Controllers\ConsumableInfoController.cs" />
+    <Compile Include="Controllers\ConsumableRecordController.cs" />
     <Compile Include="Controllers\DepartmentInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuInfoController.cs" />
+    <Compile Include="Controllers\RoleInfoController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\WorkFlow_InstanceController.cs" />
+    <Compile Include="Controllers\WorkFlow_InstanceStepController.cs" />
+    <Compile Include="Controllers\WorkFlow_ModelController.cs" />
     <Compile Include="Filters\MyFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -323,6 +331,29 @@
     <Content Include="Views\UserInfo\UpdateUserInfoView.cshtml" />
     <Content Include="Views\DepartmentInfo\UpdateDepartment.cshtml" />
     <Content Include="Views\UserInfo\UserSettingView.cshtml" />
+    <Content Include="Views\UserInfo\UpdatePassWord.cshtml" />
+    <Content Include="Views\RoleInfo\ListView.cshtml" />
+    <Content Include="Views\RoleInfo\CreateRoleView.cshtml" />
+    <Content Include="Views\RoleInfo\UpdateRoleView.cshtml" />
+    <Content Include="Views\RoleInfo\UserBindRoleView.cshtml" />
+    <Content Include="Views\MenuInfo\ListView.cshtml" />
+    <Content Include="Views\MenuInfo\CreateMenuInfoView.cshtml" />
+    <Content Include="Views\MenuInfo\EditMenuInfoView.cshtml" />
+    <Content Include="Views\RoleInfo\MenuBindRoleView.cshtml" />
+    <Content Include="Views\CategoryInfo\ListView.cshtml" />
+    <Content Include="Views\CategoryInfo\CreateCategoryView.cshtml" />
+    <Content Include="Views\CategoryInfo\UpdateCategoryView.cshtml" />
+    <Content Include="Views\ConsumableRecord\ListView.cshtml" />
+    <Content Include="Views\ConsumableInfo\ListView.cshtml" />
+    <Content Include="Views\ConsumableInfo\CreateConsumableView.cshtml" />
+    <Content Include="Views\ConsumableInfo\UpdateConsumableView.cshtml" />
+    <Content Include="Views\WorkFlow_Model\ListView.cshtml" />
+    <Content Include="Views\WorkFlow_Model\CreateWorkFlowView.cshtml" />
+    <Content Include="Views\WorkFlow_Model\UpdateWorkFlowView.cshtml" />
+    <Content Include="Views\WorkFlow_Instance\ListView.cshtml" />
+    <Content Include="Views\WorkFlow_Instance\CreateWorkFlow_InstanceView.cshtml" />
+    <Content Include="Views\WorkFlow_InstanceStep\ListView.cshtml" />
+    <Content Include="Views\WorkFlow_InstanceStep\UpdateView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

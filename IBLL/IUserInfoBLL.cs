@@ -41,6 +41,33 @@ namespace IBLL
         bool DeleteUserInfo(List<string> ids);
 
         bool UpdateUserInfo(UserInfo userInfo, out string msg);
+        /// <summary>
+        /// 下拉框的部门信息
+        /// </summary>
+        /// <returns></returns>
         object GetDepartmentSelect();
+        /// <summary>
+        /// 获取修改个人资料的信息
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        object GetUserFile(string Id);
+        GetUserInfoDTO GetUserFiles(string Id);
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="oldPwd"></param>
+        /// <param name="newPwd"></param>
+        /// <param name="againPwd"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        bool UpdatePWD(string id,string oldPwd,string newPwd,string againPwd,out string msg);
+
+        /// <summary>
+        /// 查询用户列表的方法
+        /// </summary>
+        /// <returns></returns>
+        List<GetUserInfoDTO> GetUserInfo();
     }
 }

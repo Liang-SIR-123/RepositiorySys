@@ -50,8 +50,17 @@
   <ItemGroup>
     <Compile Include="IBaseDAL.cs" />
     <Compile Include="IBaseDeleteDAL.cs" />
+    <Compile Include="ICategoryInfoDAL.cs" />
+    <Compile Include="IConsumableInfoDAL.cs" />
     <Compile Include="IDpartmentInfo.cs" />
+    <Compile Include="IMenuInfoDAL.cs" />
+    <Compile Include="IRoleInfoDAL.cs" />
+    <Compile Include="IR_RoleInfo_MenuInfoDAL.cs" />
+    <Compile Include="IR_UserInfo_RoleInfoDAL.cs" />
     <Compile Include="IUserInfoDAL.cs" />
+    <Compile Include="IWorkFlow_InstanceDAL.cs" />
+    <Compile Include="IWorkFlow_InstanceStepDAL.cs" />
+    <Compile Include="IWorkFlow_ModelDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

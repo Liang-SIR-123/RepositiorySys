@@ -21,7 +21,7 @@ namespace Models
         /// 描述
         /// </summary>
         [MaxLength(32)]
-        public string Desciption { get; set; }
+        public string Desrciption { get; set; }
         /// <summary>
         /// 等级
         /// </summary>

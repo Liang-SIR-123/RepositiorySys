@@ -197,10 +197,13 @@
                 success: function (res) {
                     console.log("接口返回结果", res);
                     if (res.code == 200) {
-                       layer.msg('登录成功', function () {
+                        layer.msg('登录成功', function () {
                             window.location = '/Home/Index';
                         });
-                    } 
+                    }
+                    else {
+                        layer.msg(res.msg);
+                    }
                 }
             })
             return false;

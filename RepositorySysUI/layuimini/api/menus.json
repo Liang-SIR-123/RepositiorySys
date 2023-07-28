@@ -85,7 +85,7 @@
       "authorityId": 7,
       "authorityName": "角色管理",
       "orderNumber": 7,
-      "menuUrl": "system/role",
+      "menuUrl": "/RoleInfo/ListView",
       "menuIcon": null,
       "createTime": "2018/06/29 11:05:41",
       "authority": null,

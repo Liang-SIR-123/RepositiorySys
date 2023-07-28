@@ -10,15 +10,15 @@ namespace Models
     /// <summary>
     /// 耗材类别表
     /// </summary>
-  public  class Category
+  public  class Category:BaseDeleteEntity
     {
         /// <summary>
         /// 主键Id
         /// </summary>
         /// 
-        [Key]
-        [MaxLength(36)]
-        public string Id { get; set; }
+        //[Key]
+        //[MaxLength(36)]
+        //public string Id { get; set; }
         /// <summary>
         /// 类别名称
         /// </summary>

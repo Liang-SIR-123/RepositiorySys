@@ -1,0 +1,158 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">工作流模板</label>
+            <div class="layui-input-block">
+                <select name="modelId" id="modelIdSelete" lay-verify="required"><option value=""></option></select>
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">物品</label>
+            <div class="layui-input-block">
+                <select name="outGoodsId" id="outGoodsIdSelect" lay-verify="required"><option value=""></option></select>
+
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label required">描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入" class="layui-textarea" name="description" lay-verify="required" lay-reqtext="描述不能为空"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">申请理由</label>
+            <div class="layui-input-block">
+                <input type="text" name="reason" lay-verify="required" lay-reqtext="申请理由不能为空" placeholder="请输入部门名称" value="" class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">申请数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="outNum" lay-verify="required" lay-reqtext="申请数量不能为空" placeholder="请输入部门名称" value="" class="layui-input">
+
+            </div>
+        </div>
+
+
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+
+            //Ajax获取下拉框数据
+            $.ajax({
+                url: '/WorkFlow_Instance/GetOption',
+                type: 'get',
+                success: function (res) {
+                    console.log(res);
+                    var modellist = res.data.modellist;
+                    for (var i = 0; i < modellist.length; i++) {
+                        $("#modelIdSelete").append('<option value="' + modellist[i].value + '">' + modellist[i].title + '</option>')
+                    }
+                    var consumablelist = res.data.consumablelist.consumable2;
+                    for (var i = 0; i < consumablelist.length; i++) {
+                        $("#outGoodsIdSelect").append('<option value="' + consumablelist[i].value + '">' + consumablelist[i].title + '</option>')
+                    }
+                    //调用form重写渲染select
+                    form.render("select");
+                }
+            })
+
+
+            //监听提交
+            form.on('submit(saveBtn)', function (data) {
+
+                console.log(data);
+                $.ajax({
+                    url: '/WorkFlow_Instance/CreateWorkFlow_Instance',
+                    type: 'post',
+                    @*data: {
+                        modelIdSelete: data.field.modelIdSelete,
+                        outGoodsIdSelect: data.field.outGoodsIdSelect,
+                        description: data.field.description,
+                        reason: data.field.reason,
+                        outNum: data.field.outNum
+
+                    },*@
+                    data: data.field,
+                    success: function (res) {
+                        //判断是否添加成功
+                        if (res.code == 200) {
+                            //重载
+                            parent.table.reload('currentTableId', {
+                                page: {
+                                    curr: 1
+                                }
+                                , where: {
+                                    // searchParams: result
+
+                                }
+                            }, 'data');
+
+
+                            var index = layer.alert(res.msg, {
+                                title: '添加的结果'
+                            }, function () {
+
+                                // 关闭弹出层
+                                layer.close(index);
+
+                                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                                //  parent.location.reload();
+                                parent.layer.close(iframeIndex);
+
+                            });
+
+                        } else {
+                            layer.alert(res.msg);
+                        }
+                    }
+                })
+
+
+
+
+
+                return false;
+            });
+
+        });</script>
+</body>
+</html>
+</html>

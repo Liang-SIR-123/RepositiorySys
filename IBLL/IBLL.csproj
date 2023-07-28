@@ -50,9 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IWorkFlow_InstanceBLL.cs" />
+    <Compile Include="ICategoryInfoBLL.cs" />
+    <Compile Include="IConsumableInfoBLL.cs" />
     <Compile Include="IDepartmentInfoBLL.cs" />
+    <Compile Include="IMenuInfoBLL.cs" />
+    <Compile Include="IRoleInfoBLL.cs" />
     <Compile Include="IUserInfoBLL.cs" />
+    <Compile Include="IWorkFlow_ModelBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IWorkFlow_InstanceStepBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

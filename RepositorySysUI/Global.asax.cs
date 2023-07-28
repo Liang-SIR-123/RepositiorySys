@@ -19,7 +19,7 @@ namespace RepositorySysUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //调用初始化数据库
-           // InitDB();
+            //InitDB();
         }
         /// <summary>
         /// 初始化触发创建数据库方法

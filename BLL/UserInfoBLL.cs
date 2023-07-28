@@ -6,6 +6,7 @@ using Models;
 using Models.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -136,7 +137,7 @@ namespace BLL
                            Email = u.Email,
                            Sex = u.Sex == 0 ? "女" : "男",
                            DepartmentName = UD.DepartmentName == null ? "" : UD.DepartmentName,
-                           DepartmentId=u.DepartmentId,
+                           DepartmentId = u.DepartmentId,
                            PhoneNum = u.PhoneNum,
                            CreateTime = u.CreateTime
                        };
@@ -202,6 +203,7 @@ namespace BLL
                 msg = "不存在该部门！";
                 return false;
             }
+            entity.PassWord = MD5Helper.GetMD5(entity.PassWord);
             //赋值Id
             entity.Id = Guid.NewGuid().ToString();
             entity.CreateTime = DateTime.Now;
@@ -358,6 +360,127 @@ namespace BLL
             };
         }
         #endregion
+        #region 修改个人资料
+        /// <summary>
+        /// 方法一
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public object GetUserFile(string Id)
+        {
+            //var user = _repositorySys.UserInfo.Where(u=>u.Id==Id).ToList();
+            var user = _UserInfoDAL.GetEntityById(Id);
+            user.PassWord = "";
+
+            return new
+            {
+                user
+
+            };
+
+
+        }
+        /// <summary>
+        /// 方法二
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public GetUserInfoDTO GetUserFiles(string Id)
+        {
+            //var user = _repositorySys.UserInfo.Where(u=>u.Id==Id).ToList();
+            var user = _UserInfoDAL.GetEntityById(Id);
+            if (user == null)
+            {
+                return new GetUserInfoDTO();
+            }
+            GetUserInfoDTO getUser = new GetUserInfoDTO()
+            {
+                Id = user.Id,
+                Account = user.Account,
+                DepartmentId = user.DepartmentId,
+                Email = user.Email,
+                PhoneNum = user.PhoneNum,
+                Sex = user.Sex== 1 ? "男" : "女",
+                UserName=user.UserName
+            };
+            return getUser;
+
+
+        }
+        #endregion
+        #region 修改密码
+        public bool UpdatePWD(string id, string oldPwd, string newPwd, string againPwd, out string msg)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                msg = "用户Id不能为空！";
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(oldPwd))
+            {
+                msg = "旧密码不能为空！";
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(newPwd))
+            {
+                msg = "新密码不能为空！";
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(againPwd))
+            {
+                msg = "确认密码不能为空！";
+                return false;
+            }
+            if (newPwd!=againPwd)
+            {
+                msg = "确认密码与新密码不一致！";
+                return false;
+            }
+
+            UserInfo user = _UserInfoDAL.GetEntityById(id);
+            if (user == null)
+            {
+                msg = "用户不存在！";
+                return false;
+            }
+            oldPwd = MD5Helper.GetMD5(oldPwd);
+            if (user.PassWord != oldPwd)
+            {
+                msg = "你输入的密码有误！";
+                return false;
+            }
+            user.PassWord = MD5Helper.GetMD5(newPwd);
+            bool isSuccess = _UserInfoDAL.UpdateEntity(user);
+            msg = isSuccess ? "修改密码成功！" : "修改密码失败！";
+            return isSuccess;
+        }
+
+        #endregion
+
+        #region MyRegion
+       public List<GetUserInfoDTO> GetUserInfo()
+        {
+            List<GetUserInfoDTO> userlist = _UserInfoDAL.GetEntity()
+                                                .Where(x => !x.IsDelete)
+                                                .Select(x => new GetUserInfoDTO
+                                                {
+                                                    Id = x.Id,
+                                                    UserName = x.UserName,
+                                                    Sex = x.Sex == 1 ? "男" : "女",
+                                                    Account = x.Account,
+                                                    Email = x.Email,
+                                                    DepartmentId = x.DepartmentId,
+                                                    PhoneNum = x.PhoneNum,
+                                                    CreateTime = x.CreateTime
+                                                })
+                                                .ToList();
+            return userlist;
+        }
+        #endregion
+
+        
+       
+
     }
 }
 

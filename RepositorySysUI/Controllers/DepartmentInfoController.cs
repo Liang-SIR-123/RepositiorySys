@@ -41,11 +41,13 @@ namespace RepositorySysUI.Controllers
             return new JsonHelper(result);
         }
         #endregion
+
+        #region 添加部门
         public ActionResult CreateDpartmentView()
         {
             return View();
         }
-        public ActionResult CreateDepartment([Form] DepartmentInfo department )
+        public ActionResult CreateDepartment([Form] DepartmentInfo department)
         {
             string msg;
             bool isSuccess = _departmentInfo.CreateDepartmentInfo(department, out msg);
@@ -58,6 +60,8 @@ namespace RepositorySysUI.Controllers
             }
             return new JsonHelper(result);
         }
+        #endregion
+
 
         #region 下拉框数据
         public ActionResult GetSelect()
@@ -130,7 +134,7 @@ namespace RepositorySysUI.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult UpdateDepartmentInfo(string Id)
+        public ActionResult UpdateDepartmentInfos(string Id)
         {
             ReturnResult result = new ReturnResult();
             if (string.IsNullOrWhiteSpace(Id))

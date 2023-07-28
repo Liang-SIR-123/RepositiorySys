@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace RepositorySysUI.Controllers
 {
+    
     public class AccountController : Controller
     {
         // private UserInfoBLL _userInfoBLL;
@@ -31,14 +32,14 @@ namespace RepositorySysUI.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Lgion(string account,string password)
+        public ActionResult Lgion(string account, string password)
         {
-           /* ReturnResult test = new ReturnResult();
-            //把.net对象转为json字符串
-            string jsonStr = JsonConvert.SerializeObject(test);
-            //把json字符串转为.net对象，转换时需要有明确的对象类型
-            ReturnResult ret = JsonConvert.DeserializeObject<ReturnResult>(jsonStr);
-*/
+            /* ReturnResult test = new ReturnResult();
+             //把.net对象转为json字符串
+             string jsonStr = JsonConvert.SerializeObject(test);
+             //把json字符串转为.net对象，转换时需要有明确的对象类型
+             ReturnResult ret = JsonConvert.DeserializeObject<ReturnResult>(jsonStr);
+ */
 
 
 
@@ -60,7 +61,7 @@ namespace RepositorySysUI.Controllers
             string userName;
             string userId;
             //调用登录业务逻辑
-            bool isSuccess= _userInfoBLL.Login(account,password,out msg,out userName,out userId);
+            bool isSuccess = _userInfoBLL.Login(account, password, out msg, out userName, out userId);
             //把提示消息赋值给结果对象Msg属性
             result.Msg = msg;
             if (isSuccess)
@@ -70,8 +71,8 @@ namespace RepositorySysUI.Controllers
                 result.Data = userName;
                 //return Json(result);
                 //把信息存到Session
-               /* HttpContext.Session["UserName"] = userName;
-                HttpContext.Session["UserId"] = userId;*/
+                /* HttpContext.Session["UserName"] = userName;
+                 HttpContext.Session["UserId"] = userId;*/
                 //存cookie
                 HttpCookie cookie = new HttpCookie("UserId", userId);
                 //在浏览器存储的时间

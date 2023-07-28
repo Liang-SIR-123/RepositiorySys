@@ -53,6 +53,31 @@ namespace RepositorySysUI
             container.RegisterType<IUserInfoBLL, UserInfoBLL>();
             container.RegisterType<IDpartmentInfo, DepartmentInfoDAL>();
             container.RegisterType<IDepartmentInfoBLL, DepartmentInfoBLL>();
+            container.RegisterType<IRoleInfoDAL, RoleInfoDAL>();
+            container.RegisterType<IRoleInfoBLL, RoleInfoBLL>();
+            container.RegisterType<IR_UserInfo_RoleInfoDAL, R_UserInfo_RoleInfoDAL>();
+            container.RegisterType<IR_RoleInfo_MenuInfoDAL, R_RoleInfo_MenuInfoDAL>();
+
+
+
+            container.RegisterType<IMenuInfoBLL, MenuInfoBLL>();
+            container.RegisterType<IMenuInfoDAL, MenuInfoDAL>();
+            container.RegisterType<ICategoryInfoDAL, CategoryInfoDAL>();
+            container.RegisterType<ICategoryInfoBLL, CategoryInfoBLL>();
+            container.RegisterType<IConsumableInfoDAL, ConsumableInfoDAL>();
+            container.RegisterType<IConsumableInfoBLL, ConsumableInfoBLL>();
+            container.RegisterType<IWorkFlow_ModelDAL, WorkFlow_ModelDAL>();
+            container.RegisterType<IWorkFlow_ModelBLL, WorkFlow_ModelBLL>();
+
+
+            container.RegisterType<IWorkFlow_InstanceBLL,WorkFlow_InstanceBLL>();
+            container.RegisterType<IWorkFlow_InstanceDAL, WorkFlow_InstanceDAL>();
+
+            container.RegisterType<IWorkFlow_InstanceStepBLL, WorkFlow_InstanceStepBLL>();
+            container.RegisterType<IWorkFlow_InstanceStepDAL, WorkFlow_InstanceStepDAL>();
+           
+
+
 
 
         }
